@@ -1,10 +1,10 @@
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
-import businesslogic.service.EventInfo;
-import businesslogic.service.ServiceInfo;
+import businesslogic.service.Event;
 import businesslogic.menu.Menu;
 import businesslogic.menu.Section;
 import businesslogic.recipe.Recipe;
+import businesslogic.service.Service;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
@@ -29,13 +29,12 @@ public class TestCatERing {
             System.out.println(m.testString());
 
             System.out.println("\nTEST GET EVENT INFO");
-            ObservableList<EventInfo> events = CatERing.getInstance().getServiceManager().getServiceInfo();
-            for (EventInfo e: events) {
-                System.out.println(e);
-                for (ServiceInfo s: e.getServices()) {
-                    System.out.println("\t" + s);
-                }
+            Event event = CatERing.getInstance().getServiceManager().getCurrentService().getEvent();
+            System.out.println(event);
+            for (Service s : event.getServices()) {
+                System.out.println("\t" + s);
             }
+
             System.out.println("");
 
             System.out.println("\nTEST GET RECIPES AND INSERT ITEM IN SECTION");

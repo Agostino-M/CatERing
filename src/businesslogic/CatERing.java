@@ -5,10 +5,11 @@ import businesslogic.menu.MenuManager;
 import businesslogic.recipe.RecipeManager;
 import businesslogic.user.UserManager;
 import persistence.MenuPersistence;
+import persistence.ServicePersistence;
 
 public class CatERing {
     private static CatERing singleInstance;
-    //TODO ho cambiato tutto ciò che era event in service
+
     public static CatERing getInstance() {
         if (singleInstance == null) {
             singleInstance = new CatERing();
@@ -20,8 +21,8 @@ public class CatERing {
     private RecipeManager recipeMgr;
     private UserManager userMgr;
     private ServiceManager serviceMgr;
-
     private MenuPersistence menuPersistence;
+    private ServicePersistence servicePersistence;
 
     private CatERing() {
         menuMgr = new MenuManager();
@@ -30,6 +31,8 @@ public class CatERing {
         serviceMgr = new ServiceManager();
         menuPersistence = new MenuPersistence();
         menuMgr.addEventReceiver(menuPersistence);
+        servicePersistence = new ServicePersistence();
+        serviceMgr.addEventReceiver(servicePersistence);
     }
 
 
@@ -45,6 +48,8 @@ public class CatERing {
         return userMgr;
     }
 
-    public ServiceManager getServiceManager() { return serviceMgr; }
+    public ServiceManager getServiceManager() {
+        return serviceMgr;
+    }
 
 }

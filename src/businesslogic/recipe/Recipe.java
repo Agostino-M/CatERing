@@ -14,6 +14,8 @@ public class Recipe {
 
     private int id;
     private String name;
+    private boolean dish;
+    private boolean preparation;
 
     private Recipe() {
 
@@ -30,6 +32,14 @@ public class Recipe {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isDish() {
+        return dish;
+    }
+
+    public boolean isPreparation() {
+        return preparation;
     }
 
     public String toString() {
@@ -54,7 +64,7 @@ public class Recipe {
                 }
             }
         });
-        ObservableList<Recipe> ret =  FXCollections.observableArrayList(all.values());
+        ObservableList<Recipe> ret = FXCollections.observableArrayList(all.values());
         Collections.sort(ret, new Comparator<Recipe>() {
             @Override
             public int compare(Recipe o1, Recipe o2) {
@@ -75,9 +85,9 @@ public class Recipe {
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
-                    rec.name = rs.getString("name");
-                    rec.id = id;
-                    all.put(rec.id, rec);
+                rec.name = rs.getString("name");
+                rec.id = id;
+                all.put(rec.id, rec);
             }
         });
         return rec;

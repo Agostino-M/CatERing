@@ -15,14 +15,15 @@ public class User {
 
     private static Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
 
-    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE};
+    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE}
 
+    private static int nextId = 1;
     private int id;
     private String username;
     private Set<Role> roles;
 
     public User() {
-        id = 0;
+        id = nextId++;
         username = "";
         this.roles = new HashSet<>();
     }
@@ -57,7 +58,7 @@ public class User {
         if (loadedUsers.containsKey(uid)) return loadedUsers.get(uid);
 
         User load = new User();
-        String userQuery = "SELECT * FROM Users WHERE id='"+uid+"'";
+        String userQuery = "SELECT * FROM Users WHERE id='" + uid + "'";
         PersistenceManager.executeQuery(userQuery, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
@@ -93,7 +94,7 @@ public class User {
 
     public static User loadUser(String username) {
         User u = new User();
-        String userQuery = "SELECT * FROM Users WHERE username='"+username+"'";
+        String userQuery = "SELECT * FROM Users WHERE username='" + username + "'";
         PersistenceManager.executeQuery(userQuery, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {

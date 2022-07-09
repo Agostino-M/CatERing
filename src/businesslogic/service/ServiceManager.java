@@ -3,6 +3,8 @@ package businesslogic.service;
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.menu.Menu;
+import businesslogic.menu.MenuException;
+import businesslogic.recipe.Recipe;
 import businesslogic.user.User;
 
 import java.util.ArrayList;
@@ -16,15 +18,19 @@ public class ServiceManager {
         serviceReceivers = new ArrayList<>();
     }
 
-    public SummarySheet createEventSheet(Event event, Service service) throws UseCaseLogicException {
+    public SummarySheet createSummarySheet(Event event, Service service) throws UseCaseLogicException, MenuException {
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
         if (!user.isChef()) {
             throw new UseCaseLogicException();
         }
 
+        if (SummarySheet.loadSummarySheet(service) != null) {
+            throw new UseCaseLogicException("Summary sheet already exists for service with id: " + service.getId());
+        }
+
         setCurrentService(service);
 
-        if (currentService.getEvent() != event) {//TODO si fa con == o tipo compare?
+        if (currentService.getEvent().getId() != event.getId()) {
             throw new UseCaseLogicException();
         }
         if (!service.isInCharge(user)) {
@@ -33,7 +39,7 @@ public class ServiceManager {
 
         SummarySheet summarySheet = service.createSummarySheet(user);
         Menu menu = service.getMenu();
-        List<Recipe> recipes = menu.getRecipes(); //TODO nel dcd c'era già dalla prof
+        List<Recipe> recipes = menu.getRecipes();
 
         for (Recipe recipe : recipes) {
             summarySheet.addAssignment(recipe);
@@ -48,10 +54,10 @@ public class ServiceManager {
         if (!user.isChef()) {
             throw new UseCaseLogicException();
         }
-        if (service.getEvent() != event) { // TODO usare != o compare?
+        if (service.getEvent().getId() != event.getId()) {
             throw new UseCaseLogicException();
         }
-        if (!service.isInCharge(user)) { // TODO si potrebbero unificare tutte le eccezioni uguali nel dsd (adesso sto solo mettendo UseCaseLogicException, poi si vede di creare quelle giuste
+        if (!service.isInCharge(user)) {
             throw new UseCaseLogicException();
         }
 
@@ -61,7 +67,7 @@ public class ServiceManager {
         if (summarySheet == null) {
             throw new UseCaseLogicException();
         }
-        if (summarySheet.getCreator() != user) { // TODO usare .getCreator nel dsd invece che .creator ?
+        if (summarySheet.getCreator() != user) {
             throw new UseCaseLogicException();
         }
 
@@ -75,74 +81,53 @@ public class ServiceManager {
         if (summarySheet == null) {
             throw new UseCaseLogicException();
         }
-        if (currentService.isInCharge(user)) { // TODO nel dsd manca la chiamata che in riga 77 ho aggiunto
+        if (currentService.isInCharge(user)) {
             throw new UseCaseLogicException();
         }
 
         Assignment assignment = summarySheet.addAssignment(recipe);
 
-        notifyAddedAssignment(summarySheet, assignment); // TODO nel dsd 2 c'è un parametro di troppo (currentService)! controllare anche i dcd
+        notifyAddedAssignment(summarySheet, assignment);
 
         return assignment;
     }
 
-    public SummarySheet sortSummarySheet(Assignment assignment, Integer position) throws UseCaseLogicException {
+    public SummarySheet sortSummarySheet(Assignment assignment, Integer position) throws UseCaseLogicException, ServiceException {
         SummarySheet summarySheet = currentService.getSummarySheet();
 
         if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
             throw new UseCaseLogicException();
         }
-        if (position < 0 || position >= summarySheet.getAssignments().size()) { //TODO secondo me il controllo sulla posizione è un po troppo di basso livello per l'uc, non so se lo terrei
-            throw new UseCaseLogicException(); //TODO non sarebbe sicuramente una UseCaseLogicException se dovesse rimanere
+        if (position < 0 || position >= summarySheet.getAssignments().size()) {
+            throw new ServiceException();
         }
 
         summarySheet.moveAssignment(assignment, position);
 
-        notifyMovedAssignment(summarySheet); //TODO l'ho rinominato rispetto al dsd e poi manca nel dcd
+        notifyMovedAssignment(summarySheet);
 
         return summarySheet;
     }
 
     public ShiftBoard getShiftBoard() {
-        // TODO MOLTO IMPORTANTE: penso che sia un bel pattern singleton, il tabellone dei turni è unico (non ricordo se è unico per CatERing o solo per il servizio / evento)
-        // potrebbe essere un modulo a parte? ha un suo controller grasp? nel dubbio non faccio il metodo
-        return null;
+        return currentService.getShiftBoard();
     }
 
-    public Assignment setAssignment(Assignment assignment, String quantity, Shift shift, Cook cook, Integer time) throws UseCaseLogicException {
+    public Assignment setAssignment(Assignment assignment, String quantity, Shift shift, User cook, Integer time) throws UseCaseLogicException {
         SummarySheet summarySheet = currentService.getSummarySheet();
-        //TODO nel dsd ci sono due condizioni nell'alt che possono essere unificate in uno solo
-        // qui metto la versione ridotta unificata
+
         if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
             throw new UseCaseLogicException();
         }
 
-        summarySheet.setAssignment(assignment, quantity, shift, cook, time); //TODO dubbio, entra in setAssignment per leggere
+        summarySheet.setAssignment(assignment, quantity, shift, cook, time);
 
-        notifyModifiedAssignment(summarySheet, assignment); // TODO nel dsd si chiama in altro modo (e non c'è quel modo) scegli tu quale
-
-        return assignment;
-    }
-
-    public Assignment modifyAssignment(Assignment assignment, String quantity, Shift shift, Cook cook, Integer time) throws UseCaseLogicException {
-        //TODO è identica a setAssignment, si potrebbe semplificare uc dettagliato, ssd, contratti e implementazione
-        //TODO nel dsd ci sono due condizioni nell'alt che possono essere unificate in uno solo
-        // qui metto la versione ridotta unificata
-        SummarySheet summarySheet = currentService.getSummarySheet();
-        if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
-            throw new UseCaseLogicException();
-        }
-
-        summarySheet.setAssignment(assignment, quantity, shift, cook, time); //TODO nel dsd ci mancano tutti i parametri in questa chiamata e poi c'è un dubbio, entra in setAssignment per leggere
-
-        notifyModifiedAssignment(summarySheet, assignment); // TODO nel dsd si chiama in altro modo (e non c'è quel modo) scegli tu quale
+        notifyUpdatedAssignment(summarySheet, assignment);
 
         return assignment;
     }
 
     public void deleteAssignment(Assignment assignment) throws UseCaseLogicException {
-        //TODO nel dsd ci sono due condizioni nell'alt che possono essere unificate in uno solo
-        // qui metto la versione ridotta unificata
         SummarySheet summarySheet = currentService.getSummarySheet();
         if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
             throw new UseCaseLogicException();
@@ -159,13 +144,9 @@ public class ServiceManager {
             throw new UseCaseLogicException();
         }
 
-        Assignment assignment = summarySheet.addAssignment(recipe); //TODO nel dsd non passiamo la qty. addassignment di per se non prende qty
-        //TODO si deve usare un altro metodo addReadyAssignment? c'è un modo per avere attributi opzionali?
-        //si aggiunge qty alla funzione e chi non lo passava passa null? boh
-        //TODO EDIT: in setAssignment ogni volta, in base al dsd, si settano cose diverse, forse in questo caso conviene usare un altro metodo
-        //infatti abbiamo tipo daPreparare false che solitamente in ogni creazione è true
+        Assignment assignment = summarySheet.addReadyAssignment(recipe, quantity);
 
-        notifyAddedAssignment(summarySheet, assignment); //TODO nel dsd c'è la notify del delete! (e anche update)
+        notifyAddedAssignment(summarySheet, assignment);
 
         return assignment;
     }
@@ -188,9 +169,9 @@ public class ServiceManager {
         }
     }
 
-    private void notifyModifiedAssignment(SummarySheet summarySheet, Assignment assignment) {
+    private void notifyUpdatedAssignment(SummarySheet summarySheet, Assignment assignment) {
         for (ServiceEventReceiver ser : serviceReceivers) {
-            ser.updateModifiedAssignment(summarySheet, assignment);
+            ser.updateUpdatedAssignment(summarySheet, assignment);
 
         }
     }
@@ -215,6 +196,10 @@ public class ServiceManager {
 
     public void removeEventReceiver(ServiceEventReceiver rec) {
         this.serviceReceivers.remove(rec);
+    }
+
+    public Service loadServiceById(int serviceId) {
+        return this.currentService = Service.loadServiceById(serviceId);
     }
 }
 

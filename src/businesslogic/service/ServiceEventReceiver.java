@@ -5,7 +5,7 @@ public interface ServiceEventReceiver {
 
     void updateAddedAssignment(SummarySheet summarySheet, Assignment assignment);
 
-    void updateModifiedAssignment(SummarySheet summarySheet, Assignment assignment);
+    void updateUpdatedAssignment(SummarySheet summarySheet, Assignment assignment);
 
     void updateDeleteAssignment(SummarySheet summarySheet, Assignment assignment);
 

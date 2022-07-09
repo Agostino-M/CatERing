@@ -318,4 +318,5 @@ public class MenuManager {
     public void removeEventReceiver(MenuEventReceiver rec) {
         this.eventReceivers.remove(rec);
     }
+
 }

@@ -28,6 +28,7 @@ public class SummarySheet {
     }
 
     public SummarySheet() {
+        assignments = new ArrayList<>();
     }
 
     public SummarySheet(User user) {
@@ -47,14 +48,14 @@ public class SummarySheet {
         return id;
     }
 
-    public Assignment addAssignment(Recipe recipe) {
+    public Assignment addAssignment(Recipe recipe, int position) {
         Assignment assignment = new Assignment(recipe);
-        assignments.add(assignment);
+        assignments.add(position, assignment);
         return assignment;
     }
 
-    public Assignment addReadyAssignment(Recipe recipe, String quantity) {
-        Assignment assignment = new Assignment(recipe, quantity);
+    public Assignment addReadyAssignment(Recipe recipe, String quantity, int position) {
+        Assignment assignment = new Assignment(recipe, quantity, position);
         assignments.add(assignment);
         return assignment;
     }
@@ -151,23 +152,25 @@ public class SummarySheet {
 
     public static SummarySheet loadSummarySheet(Service s) {
         String query = "SELECT * FROM SummarySheets sh " +
-                "join Assignments a on (sh.id=a.summary_sheet_id) " +
+                "left join Assignments a on (sh.id=a.summary_sheet_id) " +
                 "WHERE sh.service_id=" + s.getId();
         List<Assignment> newTasks = new ArrayList<>();
         ArrayList<Integer> cookIds = new ArrayList<>();
         ArrayList<Integer> shiftIds = new ArrayList<>();
         ArrayList<Integer> recipeIds = new ArrayList<>();
         final int[] sheetId = new int[1];
-
+        final int[] creatorId = new int[1];
         PersistenceManager.executeQuery(query, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {
                 sheetId[0] = rs.getInt("sh.id");
+                creatorId[0] = rs.getInt("creator_id");
+
                 Assignment kt = new Assignment();
                 kt.setId(rs.getInt("a.summary_sheet_id"));
-                kt.setToPrepare(rs.getBoolean("prepared"));
+                kt.setToPrepare(rs.getBoolean("to_prepare"));
                 kt.setQuantity(rs.getString("quantity"));
-                kt.setTime(rs.getInt("time_required"));
+                kt.setTime(rs.getInt("time"));
                 kt.setAssigned(rs.getBoolean("assigned"));
                 kt.setPosition(rs.getInt("position"));
 
@@ -179,6 +182,63 @@ public class SummarySheet {
         });
 
         SummarySheet newSheet = new SummarySheet();
+        newSheet.setId(sheetId[0]);
+        newSheet.setCreator(User.loadUserById(creatorId[0]));
+
+        int i = 0;
+        for (Assignment task : newTasks) {
+
+            User cook = User.loadUserById(cookIds.get(i));
+            task.setCook((cook.getId() > 0) ? cook : null);
+
+            Shift shift = Shift.loadShiftById(shiftIds.get(i));
+            task.setShift((shift.getId() > 0) ? shift : null);
+
+            Recipe recipe = Recipe.loadRecipeById(recipeIds.get(i));
+            task.setRecipe((recipe.getId() > 0) ? recipe : null);
+
+            newSheet.assignments.add(task);
+            i++;
+        }
+
+        return newSheet;
+    }
+
+    public static SummarySheet loadSummarySheetById(int id) {
+        String query = "SELECT * FROM SummarySheets sh " +
+                "left join Assignments a on (sh.id=a.summary_sheet_id) " +
+                "WHERE sh.id=" + id;
+        List<Assignment> newTasks = new ArrayList<>();
+        ArrayList<Integer> cookIds = new ArrayList<>();
+        ArrayList<Integer> shiftIds = new ArrayList<>();
+        ArrayList<Integer> recipeIds = new ArrayList<>();
+        final int[] sheetId = new int[1];
+        int[] creatorId = new int[1];
+
+        PersistenceManager.executeQuery(query, new ResultHandler() {
+            @Override
+            public void handle(ResultSet rs) throws SQLException {
+                sheetId[0] = rs.getInt("sh.id");
+                creatorId[0] = rs.getInt("creator_id");
+
+                Assignment kt = new Assignment();
+                kt.setId(rs.getInt("a.summary_sheet_id"));
+                kt.setToPrepare(rs.getBoolean("to_prepare"));
+                kt.setQuantity(rs.getString("quantity"));
+                kt.setTime(rs.getInt("time"));
+                kt.setAssigned(rs.getBoolean("assigned"));
+                kt.setPosition(rs.getInt("position"));
+
+                newTasks.add(kt);
+                cookIds.add(rs.getInt("cook_id"));
+                shiftIds.add(rs.getInt("shift_id"));
+                recipeIds.add(rs.getInt("recipe_id"));
+            }
+        });
+
+        SummarySheet newSheet = new SummarySheet();
+        newSheet.setId(sheetId[0]);
+        newSheet.setCreator(User.loadUserById(creatorId[0]));
 
         int i = 0;
         for (Assignment task : newTasks) {

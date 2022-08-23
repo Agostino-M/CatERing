@@ -1,5 +1,6 @@
 package businesslogic.recipe;
 
+import businesslogic.menu.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistence.PersistenceManager;
@@ -91,6 +92,22 @@ public class Recipe {
             }
         });
         return rec;
+    }
+
+    public static List<Recipe> loadRecipesByMenuId(int menuId) { // TODO non so se serve, nel caso eliminare
+        String query = "SELECT r.* FROM MenuItems m Join Recipes r on (m.recipe_id = r.id) WHERE m.menu_id = " + menuId;
+        ArrayList<Recipe> recipes = new ArrayList<>();
+        PersistenceManager.executeQuery(query, new ResultHandler() {
+            @Override
+            public void handle(ResultSet rs) throws SQLException {
+                Recipe r = new Recipe();
+                r.id = rs.getInt("id");
+                r.name = rs.getString("name");
+                recipes.add(r);
+            }
+        });
+
+        return recipes;
     }
 
 

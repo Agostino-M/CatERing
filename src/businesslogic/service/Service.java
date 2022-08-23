@@ -95,11 +95,24 @@ public class Service {
         this.chef = chef;
     }
 
+    @Override
     public String toString() {
-        return name + ": " + date + " (" + timeStart + "-" + timeEnd + "), " + participants + " pp.";
+        return "Service{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", timeStart=" + timeStart +
+                ", timeEnd=" + timeEnd +
+                ", participants=" + participants +
+                ", summarySheet=" + summarySheet +
+                ", menu=" + menu +
+                ", shiftBoard=" + shiftBoard +
+                ", event=" + event +
+                ", chef=" + chef +
+                '}';
     }
 
-    // STATIC METHODS FOR PERSISTENCE
+// STATIC METHODS FOR PERSISTENCE
 
     public static ObservableList<Service> loadServicesForEvent(int event_id) {
         ObservableList<Service> result = FXCollections.observableArrayList();
@@ -133,7 +146,6 @@ public class Service {
                 ser.participants = rs.getInt("expected_participants");
                 ser.timeEnd = rs.getTime("time_end");
                 ser.timeStart = rs.getTime("time_start");
-                ser.participants = rs.getInt("expected_participants");
                 ser.date = rs.getDate("service_date");
                 int eId = rs.getInt("event_id");
                 ser.event = Event.loadEventById(eId);
@@ -141,6 +153,8 @@ public class Service {
                 ser.chef = User.loadUserById(chefId);
                 int menuId = rs.getInt("approved_menu_id");
                 ser.menu = Menu.loadMenuById(menuId);
+                int sumId = rs.getInt("summary_sheet_id");
+                ser.summarySheet = SummarySheet.loadSummarySheetById(sumId);
             }
         });
 

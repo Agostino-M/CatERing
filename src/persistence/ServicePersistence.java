@@ -13,8 +13,8 @@ public class ServicePersistence implements ServiceEventReceiver {
     }
 
     @Override
-    public void updateAddedAssignment(SummarySheet summarySheet, Assignment assignment) {
-        Assignment.saveNewAssignment(summarySheet.getId(), assignment);
+    public void updateAddedAssignment(SummarySheet summarySheet, Assignment assignment, int position) {
+        Assignment.saveNewAssignment(summarySheet.getId(), assignment, position);
     }
 
     @Override

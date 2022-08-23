@@ -49,7 +49,7 @@ public class Shift {
 
     public static Shift loadShiftById(int sId) {
         Shift shift = new Shift();
-        String query = "SELECT s.* FROM Shifts WHERE id =" + sId;
+        String query = "SELECT * FROM Shifts WHERE id =" + sId;
         ArrayList<Integer> availableCookIds = new ArrayList<>();
         ArrayList<Integer> assignedTaskIds = new ArrayList<>();
 

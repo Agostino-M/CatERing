@@ -19,7 +19,12 @@ public class TestDsd1 {
 
             int serviceId = 2;
             Service service = instance.getServiceManager().loadServiceById(serviceId);
-            instance.getMenuManager().setCurrentMenu(service.getMenu());
+            System.out.println("\nCurrent service");
+            System.out.println(instance.getServiceManager().getCurrentService());
+
+            instance.getMenuManager().setCurrentMenu(service.getMenu()); //TODO Forse si potrebbe fare in automatico nel loadservice?
+            System.out.println("\nMenu");
+            System.out.println(instance.getMenuManager().getCurrentMenu());
 
             System.out.println("\nTEST GET EVENT INFO");
             Event event = instance.getServiceManager().getCurrentService().getEvent();
@@ -30,15 +35,22 @@ public class TestDsd1 {
 
             //SummarySheet summarySheet = instance.getServiceManager().createSummarySheet(event, service);
             SummarySheet summarySheet = instance.getServiceManager().openExistingSummarySheet(event, service);
+            System.out.println("\nSummary Sheet");
+            System.out.println(summarySheet);
 
             List<Recipe> recipes = instance.getMenuManager().getCurrentMenu().getRecipes();
-            System.out.println("RICETTE");
+            System.out.println("\nRICETTE");
             System.out.println(recipes);
-            //
+
+            Assignment assignment = instance.getServiceManager().addAssigment(recipes.get(1), 1);
+            System.out.println("Aggiungo un compito con la ricetta: " + recipes.get(1));
+            System.out.println(summarySheet);
+
+            instance.getServiceManager().sortSummarySheet(assignment, 0);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 }

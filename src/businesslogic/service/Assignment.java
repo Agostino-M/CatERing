@@ -48,10 +48,11 @@ public class Assignment {
         this.toPrepare = true;
     }
 
-    public Assignment(Recipe recipe, String quantity) {
+    public Assignment(Recipe recipe, String quantity, int position) {
         this.recipe = recipe;
         this.assigned = false;
         this.toPrepare = false;
+        this.position = position;
         this.quantity = quantity;
     }
 
@@ -128,17 +129,18 @@ public class Assignment {
     }
 
     // STATIC METHODS FOR PERSISTENCE
-    public static void saveNewAssignment(int summarySheetId, Assignment assignment) {
-        String secInsert = "INSERT INTO catering.Assignments (time, quantity, to_prepare, assigned, cook_id, shift_id, recipe_id, summary_sheet_id)" +
+    public static void saveNewAssignment(int summarySheetId, Assignment assignment, int position) {
+        String secInsert = "INSERT INTO catering.Assignments (time, quantity, to_prepare, assigned, cook_id, shift_id, recipe_id, summary_sheet_id, position)" +
                 "VALUES (" +
                 assignment.time + ", " +
                 assignment.quantity + ", " +
                 assignment.toPrepare + ", " +
                 assignment.assigned + ", " +
-                assignment.cook + ", " +
-                assignment.shift + ", " +
-                assignment.recipe + ", " +
-                summarySheetId +
+                (assignment.cook != null ? String.valueOf(assignment.cook.getId()) : null) + ", " +
+                (assignment.shift != null ? assignment.shift.getId() : null) + ", " +
+                assignment.recipe.getId() + ", " +
+                summarySheetId + ", " +
+                position +
                 ");";
         PersistenceManager.executeUpdate(secInsert);
         assignment.id = PersistenceManager.getLastId();

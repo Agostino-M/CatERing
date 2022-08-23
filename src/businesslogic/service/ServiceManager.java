@@ -24,10 +24,6 @@ public class ServiceManager {
             throw new UseCaseLogicException();
         }
 
-        if (SummarySheet.loadSummarySheet(service) != null) {
-            throw new UseCaseLogicException("Summary sheet already exists for service with id: " + service.getId());
-        }
-
         setCurrentService(service);
 
         if (currentService.getEvent().getId() != event.getId()) {
@@ -41,8 +37,9 @@ public class ServiceManager {
         Menu menu = service.getMenu();
         List<Recipe> recipes = menu.getRecipes();
 
+        int i = 1;
         for (Recipe recipe : recipes) {
-            summarySheet.addAssignment(recipe);
+            summarySheet.addAssignment(recipe, i++);
         }
 
         notifySummarySheetCreated(service, summarySheet);
@@ -62,7 +59,7 @@ public class ServiceManager {
         }
 
         setCurrentService(service);
-        SummarySheet summarySheet = currentService.getSummarySheet();
+        SummarySheet summarySheet = service.getSummarySheet();
 
         if (summarySheet == null) {
             throw new UseCaseLogicException();
@@ -74,20 +71,20 @@ public class ServiceManager {
         return summarySheet;
     }
 
-    public Assignment addAssigment(Recipe recipe) throws UseCaseLogicException {
+    public Assignment addAssigment(Recipe recipe, int position) throws UseCaseLogicException {
         SummarySheet summarySheet = currentService.getSummarySheet();
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
 
         if (summarySheet == null) {
             throw new UseCaseLogicException();
         }
-        if (currentService.isInCharge(user)) {
+        if (!currentService.isInCharge(user)) {
             throw new UseCaseLogicException();
         }
 
-        Assignment assignment = summarySheet.addAssignment(recipe);
+        Assignment assignment = summarySheet.addAssignment(recipe, position);
 
-        notifyAddedAssignment(summarySheet, assignment);
+        notifyAddedAssignment(summarySheet, assignment, position);
 
         return assignment;
     }
@@ -138,15 +135,15 @@ public class ServiceManager {
         notifyDeleteAssignement(summarySheet, assignment);
     }
 
-    public Assignment createReadyAssignment(Recipe recipe, String quantity) throws UseCaseLogicException {
+    public Assignment createReadyAssignment(Recipe recipe, String quantity, int position) throws UseCaseLogicException {
         SummarySheet summarySheet = currentService.getSummarySheet();
         if (summarySheet == null) {
             throw new UseCaseLogicException();
         }
 
-        Assignment assignment = summarySheet.addReadyAssignment(recipe, quantity);
+        Assignment assignment = summarySheet.addReadyAssignment(recipe, quantity, position);
 
-        notifyAddedAssignment(summarySheet, assignment);
+        notifyAddedAssignment(summarySheet, assignment, position);
 
         return assignment;
     }
@@ -157,9 +154,9 @@ public class ServiceManager {
         }
     }
 
-    private void notifyAddedAssignment(SummarySheet summarySheet, Assignment assignment) {
+    private void notifyAddedAssignment(SummarySheet summarySheet, Assignment assignment, int position) {
         for (ServiceEventReceiver ser : serviceReceivers) {
-            ser.updateAddedAssignment(summarySheet, assignment);
+            ser.updateAddedAssignment(summarySheet, assignment, position);
         }
     }
 

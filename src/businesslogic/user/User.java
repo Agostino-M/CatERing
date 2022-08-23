@@ -40,19 +40,16 @@ public class User {
         return this.id;
     }
 
+    @Override
     public String toString() {
-        String result = username;
-        if (roles.size() > 0) {
-            result += ": ";
-
-            for (User.Role r : roles) {
-                result += r.toString() + " ";
-            }
-        }
-        return result;
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 
-    // STATIC METHODS FOR PERSISTENCE
+// STATIC METHODS FOR PERSISTENCE
 
     public static User loadUserById(int uid) {
         if (loadedUsers.containsKey(uid)) return loadedUsers.get(uid);

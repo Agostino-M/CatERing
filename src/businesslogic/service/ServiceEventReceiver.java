@@ -9,5 +9,5 @@ public interface ServiceEventReceiver {
 
     void updateDeleteAssignment(SummarySheet summarySheet, Assignment assignment);
 
-    void updateMovedAssignment(SummarySheet summarySheet);
+    void updateMovedAssignment(SummarySheet summarySheet, Assignment assignment, int position);
 }

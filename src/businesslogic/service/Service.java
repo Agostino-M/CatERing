@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Service {
@@ -27,7 +28,7 @@ public class Service {
     private Event event;
     private User chef;
 
-    private static Map<Integer, Service> loadedServices = FXCollections.observableHashMap();
+    private static final Map<Integer, Service> loadedServices = new HashMap<>();
 
     public Service(String name) {
         this.name = name;
@@ -97,24 +98,17 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", date=" + date +
-                ", timeStart=" + timeStart +
-                ", timeEnd=" + timeEnd +
-                ", participants=" + participants +
-                ", summarySheet=" + summarySheet +
-                ", menu=" + menu +
-                ", shiftBoard=" + shiftBoard +
-                ", event=" + event +
-                ", chef=" + chef +
-                '}';
+        return name + " " + date + " from " + timeStart + " to " + timeEnd + " " + participants + " pp." + "\n" +
+                " \tsummary Sheet: " + summarySheet + "\n" +
+                " \tmenu: " + menu + "\n" +
+                " \tshift board: " + shiftBoard + "\n" +
+                " \tevent: " + event + "\n" +
+                " \tchef: " + chef;
     }
 
 // STATIC METHODS FOR PERSISTENCE
 
-    public static ObservableList<Service> loadServicesForEvent(int event_id) {
+    public static ObservableList<Service> loadServicesByEvent(int event_id) {
         ObservableList<Service> result = FXCollections.observableArrayList();
         String query = "SELECT id, name, service_date, time_start, time_end, expected_participants " +
                 "FROM Services WHERE event_id = " + event_id;
@@ -136,6 +130,10 @@ public class Service {
     }
 
     public static Service loadServiceById(int serviceId) {
+        if (loadedServices.containsKey(serviceId)) {
+            return loadedServices.get(serviceId);
+        }
+
         String query = "SELECT * FROM Services WHERE id=" + serviceId;
         Service ser = new Service();
         PersistenceManager.executeQuery(query, new ResultHandler() {
@@ -155,9 +153,22 @@ public class Service {
                 ser.menu = Menu.loadMenuById(menuId);
                 int sumId = rs.getInt("summary_sheet_id");
                 ser.summarySheet = SummarySheet.loadSummarySheetById(sumId);
+                int shiftId = rs.getInt("shift_board_id");
+                ser.shiftBoard = ShiftBoard.loadShiftBoardById(shiftId);
             }
         });
 
+        if (ser.id > 0) {
+            loadedServices.put(ser.id, ser);
+        }
+
         return ser;
     }
+
+    public static void updateService(Service service) {
+        String upd = "UPDATE Services SET summary_sheet_id = " + service.summarySheet.getId() +
+                " WHERE id = " + service.getId();
+        PersistenceManager.executeUpdate(upd);
+    }
+
 }

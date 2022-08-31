@@ -1,6 +1,5 @@
 package businesslogic.service;
 
-import businesslogic.menu.Menu;
 import businesslogic.recipe.Recipe;
 import businesslogic.user.User;
 import persistence.BatchUpdateHandler;
@@ -27,23 +26,9 @@ public class Assignment {
 
     }
 
-    @Override
-    public String toString() {
-        return "Assignment{" +
-                "id=" + id +
-                ", quantity='" + quantity + '\'' +
-                ", time=" + time +
-                ", position=" + position +
-                ", toPrepare=" + toPrepare +
-                ", assigned=" + assigned +
-                ", cook=" + cook +
-                ", shift=" + shift +
-                ", recipe=" + recipe +
-                '}';
-    }
-
-    public Assignment(Recipe recipe) {
+    public Assignment(Recipe recipe, int position) {
         this.recipe = recipe;
+        this.position = position;
         this.assigned = false;
         this.toPrepare = true;
     }
@@ -54,6 +39,15 @@ public class Assignment {
         this.toPrepare = false;
         this.position = position;
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\t\t" + position + "°: " + recipe + (quantity != null && !quantity.equals("") ? ", " + quantity : "") +
+                ", " + time + " minutes" +
+                ", " + (toPrepare ? "to prepare" : "not to prepare") +
+                ", " + (assigned ? "assigned to " + cook : "not assigned") +
+                ", " + (shift != null ? "in shift with: " + shift : "without shift");
     }
 
     public String getQuantity() {
@@ -132,8 +126,8 @@ public class Assignment {
     public static void saveNewAssignment(int summarySheetId, Assignment assignment, int position) {
         String secInsert = "INSERT INTO catering.Assignments (time, quantity, to_prepare, assigned, cook_id, shift_id, recipe_id, summary_sheet_id, position)" +
                 "VALUES (" +
-                assignment.time + ", " +
-                assignment.quantity + ", " +
+                ((assignment.time != null) ? assignment.time : 0) + ", " +
+                "'" + (assignment.quantity != null ? PersistenceManager.escapeString(assignment.quantity) : "") + "', " +
                 assignment.toPrepare + ", " +
                 assignment.assigned + ", " +
                 (assignment.cook != null ? String.valueOf(assignment.cook.getId()) : null) + ", " +
@@ -147,44 +141,55 @@ public class Assignment {
     }
 
     public static void saveAllNewAssignments(int summarySheetId, List<Assignment> assignments) {
-        String secInsert = "INSERT INTO Assignments (time, quantity, to_prepare, assigned, cook_id, shift_id, recipe_id, summary_sheet_id) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String secInsert = "INSERT INTO Assignments (time, quantity, to_prepare, assigned, cook_id, shift_id, recipe_id, summary_sheet_id, position) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         PersistenceManager.executeBatchUpdate(secInsert, assignments.size(), new BatchUpdateHandler() {
             @Override
             public void handleBatchItem(PreparedStatement ps, int batchCount) throws SQLException {
-                ps.setInt(1, assignments.get(batchCount).time);
-                ps.setString(2, PersistenceManager.escapeString(assignments.get(batchCount).quantity));
+                ps.setInt(1, (assignments.get(batchCount).time != null) ? assignments.get(batchCount).time : 0);
+                ps.setObject(2, (assignments.get(batchCount).quantity != null) ? PersistenceManager.escapeString(assignments.get(batchCount).quantity) : null);
                 ps.setBoolean(3, assignments.get(batchCount).toPrepare);
                 ps.setBoolean(4, assignments.get(batchCount).assigned);
-                ps.setInt(5, assignments.get(batchCount).cook.getId());
-                ps.setInt(6, assignments.get(batchCount).shift.getId());
-                ps.setInt(6, assignments.get(batchCount).recipe.getId());
-                ps.setInt(7, summarySheetId);
+                ps.setObject(5, (assignments.get(batchCount).cook != null) ? assignments.get(batchCount).cook.getId() : null);
+                ps.setObject(6, (assignments.get(batchCount).shift != null) ? assignments.get(batchCount).shift.getId() : null);
+                ps.setInt(7, assignments.get(batchCount).recipe.getId());
+                ps.setInt(8, summarySheetId);
+                ps.setInt(9, batchCount);
+
             }
 
             @Override
             public void handleGeneratedIds(ResultSet rs, int count) throws SQLException {
                 assignments.get(count).id = rs.getInt(1);
+                assignments.get(count).toPrepare = assignments.get(count).toPrepare;
+                assignments.get(count).assigned = assignments.get(count).assigned;
             }
         });
     }
 
     public static void updateAssignment(int summarySheetId, Assignment assignment) {
-        String secInsert = "UPDATE catering.Assignments SET (" +
+        String update = "UPDATE catering.Assignments SET " +
                 "time = " + assignment.time + ", " +
-                "quantity = " + assignment.quantity + ", " +
+                "quantity = '" + (assignment.quantity != null ? PersistenceManager.escapeString(assignment.quantity) : "") + "', " +
                 "to_prepare = " + assignment.toPrepare + ", " +
                 "assigned = " + assignment.assigned + ", " +
-                "cook_id = " + assignment.cook + ", " +
-                "shift_id = " + assignment.shift + ", " +
-                "recipe_id = " + assignment.recipe + ", " +
-                "summary_sheet_id = " + summarySheetId +
-                ");";
-        PersistenceManager.executeUpdate(secInsert);
+                "cook_id = " + ((assignment.cook != null) ? assignment.cook.getId() : null) + ", " +
+                "shift_id = " + ((assignment.shift != null) ? assignment.shift.getId() : null) + ", " +
+                "recipe_id = " + assignment.recipe.getId() + ", " +
+                "summary_sheet_id = " + summarySheetId + ", " +
+                "position = " + (assignment.getPosition()) +
+                " WHERE id = " + assignment.getId();
+        PersistenceManager.executeUpdate(update);
     }
 
-    public static void deleteAssignment(Assignment assignment) {
+    public static void deleteAssignment(int summarySheetId, Assignment assignment) {
         String del = "DELETE FROM Assignments WHERE id = " + assignment.id;
         PersistenceManager.executeUpdate(del);
+
+        String update = "UPDATE Assignments SET position = (position -1) " +
+                " WHERE position > " + assignment.getPosition() +
+                " AND summary_sheet_id = " + summarySheetId +
+                " ORDER BY position asc";
+        PersistenceManager.executeUpdate(update);
     }
 }

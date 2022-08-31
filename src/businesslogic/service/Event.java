@@ -78,7 +78,7 @@ public class Event {
         });
 
         for (Event e : all) {
-            e.services = Service.loadServicesForEvent(e.id);
+            e.services = Service.loadServicesByEvent(e.id);
         }
         return all;
     }
@@ -102,7 +102,7 @@ public class Event {
         });
 
         for (Event e : all) {
-            e.services = Service.loadServicesForEvent(e.id);
+            e.services = Service.loadServicesByEvent(e.id);
         }
         return ev;
     }

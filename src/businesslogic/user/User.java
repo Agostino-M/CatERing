@@ -13,17 +13,15 @@ import java.util.Set;
 
 public class User {
 
-    private static Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
+    private static final Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
 
-    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE}
+    public enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE}
 
-    private static int nextId = 1;
     private int id;
     private String username;
-    private Set<Role> roles;
+    private final Set<Role> roles;
 
     public User() {
-        id = nextId++;
         username = "";
         this.roles = new HashSet<>();
     }
@@ -42,11 +40,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", roles=" + roles +
-                '}';
+        return username + " with roles: " + roles;
     }
 
 // STATIC METHODS FOR PERSISTENCE
@@ -55,7 +49,7 @@ public class User {
         if (loadedUsers.containsKey(uid)) return loadedUsers.get(uid);
 
         User load = new User();
-        String userQuery = "SELECT * FROM Users WHERE id='" + uid + "'";
+        String userQuery = "SELECT * FROM Users WHERE id = " + uid;
         PersistenceManager.executeQuery(userQuery, new ResultHandler() {
             @Override
             public void handle(ResultSet rs) throws SQLException {

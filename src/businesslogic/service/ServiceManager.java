@@ -99,8 +99,11 @@ public class ServiceManager {
     public void sortSummarySheet(Assignment assignment, Integer position) throws UseCaseLogicException, SummarySheetException {
         SummarySheet summarySheet = currentService.getSummarySheet();
 
-        if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
+        if (summarySheet == null) {
             throw new UseCaseLogicException();
+        }
+        if (!summarySheet.containAssignment(assignment)) {
+            throw new SummarySheetException();
         }
         if (position <= 0 || position >= summarySheet.getAssignments().size()) {
             throw new SummarySheetException();
@@ -121,11 +124,14 @@ public class ServiceManager {
         return shiftBoard;
     }
 
-    public void setAssignment(Assignment assignment, String quantity, Shift shift, User cook, Integer time) throws UseCaseLogicException {
+    public void setAssignment(Assignment assignment, String quantity, Shift shift, User cook, Integer time) throws UseCaseLogicException, SummarySheetException {
         SummarySheet summarySheet = currentService.getSummarySheet();
 
-        if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
+        if (summarySheet == null) {
             throw new UseCaseLogicException();
+        }
+        if (!summarySheet.containAssignment(assignment)) {
+            throw new SummarySheetException();
         }
 
         summarySheet.setAssignment(assignment, quantity, shift, cook, time);
@@ -133,10 +139,13 @@ public class ServiceManager {
         notifyUpdatedAssignment(summarySheet, assignment);
     }
 
-    public void deleteAssignment(Assignment assignment) throws UseCaseLogicException {
+    public void deleteAssignment(Assignment assignment) throws SummarySheetException, UseCaseLogicException {
         SummarySheet summarySheet = currentService.getSummarySheet();
-        if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
+        if (summarySheet == null) {
             throw new UseCaseLogicException();
+        }
+        if (!summarySheet.containAssignment(assignment)) {
+            throw new SummarySheetException();
         }
 
         summarySheet.deleteAssignment(assignment);

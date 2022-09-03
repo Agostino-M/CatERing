@@ -3,7 +3,7 @@ import businesslogic.service.Event;
 import businesslogic.service.Service;
 import businesslogic.service.SummarySheet;
 
-public class TestEstPasso1a {
+public class TestPasso1a {
 
     public static void main(String[] args) {
         try {

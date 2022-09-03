@@ -163,7 +163,7 @@ public class Menu {
 
     public ObservableList<Section> getSections() throws MenuException {
         if (sections == null) {
-            throw new MenuException("No sections");
+            throw new MenuException();
         }
         return FXCollections.unmodifiableObservableList(this.sections);
     }

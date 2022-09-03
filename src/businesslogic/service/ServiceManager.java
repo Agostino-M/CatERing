@@ -75,7 +75,7 @@ public class ServiceManager {
         return summarySheet;
     }
 
-    public Assignment addAssignment(Recipe recipe, int position) throws UseCaseLogicException, ServiceException {
+    public Assignment addAssignment(Recipe recipe, int position) throws UseCaseLogicException, SummarySheetException {
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
         SummarySheet summarySheet = currentService.getSummarySheet();
 
@@ -86,7 +86,7 @@ public class ServiceManager {
             throw new UseCaseLogicException();
         }
         if (position < 0 || position >= summarySheet.getAssignments().size()) {
-            throw new ServiceException();
+            throw new SummarySheetException();
         }
 
         Assignment assignment = summarySheet.addAssignment(recipe, position);
@@ -96,14 +96,14 @@ public class ServiceManager {
         return assignment;
     }
 
-    public void sortSummarySheet(Assignment assignment, Integer position) throws UseCaseLogicException, ServiceException {
+    public void sortSummarySheet(Assignment assignment, Integer position) throws UseCaseLogicException, SummarySheetException {
         SummarySheet summarySheet = currentService.getSummarySheet();
 
         if (summarySheet == null || !summarySheet.containAssignment(assignment)) {
             throw new UseCaseLogicException();
         }
         if (position <= 0 || position >= summarySheet.getAssignments().size()) {
-            throw new ServiceException();
+            throw new SummarySheetException();
         }
 
         summarySheet.moveAssignment(assignment, position);
@@ -111,11 +111,12 @@ public class ServiceManager {
         notifyMovedAssignment(summarySheet, assignment, position);
     }
 
-    public ShiftBoard getShiftBoard() throws UseCaseLogicException {
+    public ShiftBoard getShiftBoard() throws ShiftBoardException {
         ShiftBoard shiftBoard = currentService.getShiftBoard();
 
-        if (shiftBoard == null)
-            throw new UseCaseLogicException();
+        if (shiftBoard == null) {
+            throw new ShiftBoardException();
+        }
 
         return shiftBoard;
     }

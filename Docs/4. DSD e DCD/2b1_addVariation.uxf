@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>176</x>
+      <y>296</y>
+      <w>48</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>328</y>
+      <w>24</w>
+      <h>856</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1050.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>336</y>
+      <w>24</w>
+      <h>848</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1040.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>360</y>
+      <w>312</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+addVariation(oI, aI, pos, early, onPlace, description)</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>488</x>
+      <y>352</y>
+      <w>16</w>
+      <h>808</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>80</x>
+      <y>384</y>
+      <w>1480</w>
+      <h>784</h>
+    </coordinates>
+    <panel_attributes>alt
+[cpManager.currentCp() == null]
+--
+
+
+-.
+
+
+
+
+-.
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>408</y>
+      <w>312</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw UseCaseLogicException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>336</y>
+      <w>24</w>
+      <h>848</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1040.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>416</x>
+      <y>296</y>
+      <w>160</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>CatERingAppManager.
+cpManager
+:CookingProcedureManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>744</x>
+      <y>296</y>
+      <w>160</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>CatERingAppManager.
+cpManager.currentCp
+:CookingProcedure
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>496</y>
+      <w>320</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+addVariation(oI, aI, pos, early, onPlace, description)</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>80</x>
+      <y>440</y>
+      <w>112</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>[early == onPlace]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>448</y>
+      <w>312</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw CookingProcedureException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>816</x>
+      <y>520</y>
+      <w>664</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>alt
+[early == true &amp;&amp;
+currentCp.getEarlyInstructions == null]
+--
+
+
+
+
+-.
+
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>816</x>
+      <y>608</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>[onPlace == true &amp;&amp;
+currentCp.getonPlaceInstructions == null]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>552</y>
+      <w>344</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;&gt;
+create()</panel_attributes>
+    <additional_attributes>10.0;20.0;410.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1136</x>
+      <y>552</y>
+      <w>168</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>currentCp.earlyInstructions:
+ArrayList&lt;Instruction&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>648</y>
+      <w>496</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;&gt;
+create()</panel_attributes>
+    <additional_attributes>10.0;20.0;600.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1288</x>
+      <y>648</y>
+      <w>176</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>currentCp.onPlaceInstructions:
+ArrayList&lt;Instruction&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1224</x>
+      <y>576</y>
+      <w>24</w>
+      <h>608</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1352</x>
+      <y>672</y>
+      <w>24</w>
+      <h>512</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;620.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>704</y>
+      <w>296</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+create(oI, aI, pos, early, onPlace, description)</panel_attributes>
+    <additional_attributes>350.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1088</x>
+      <y>704</y>
+      <w>104</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>v
+:Variant
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1136</x>
+      <y>736</y>
+      <w>216</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+this.description = description</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1128</x>
+      <y>736</y>
+      <w>16</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1128</x>
+      <y>728</y>
+      <w>24</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>848</y>
+      <w>336</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+v</panel_attributes>
+    <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>816</x>
+      <y>880</y>
+      <w>560</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>alt
+[early == true]
+--
+
+
+
+
+-.
+
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>816</x>
+      <y>960</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>[onPlace == true]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>912</y>
+      <w>432</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;&gt;
+add(position, v)</panel_attributes>
+    <additional_attributes>10.0;20.0;520.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>976</y>
+      <w>560</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;&gt;&gt;
+add(position, v)</panel_attributes>
+    <additional_attributes>10.0;20.0;680.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1224</x>
+      <y>920</y>
+      <w>16</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1352</x>
+      <y>984</y>
+      <w>16</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>800</x>
+      <y>504</y>
+      <w>16</w>
+      <h>632</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>1112</y>
+      <w>320</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+v</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>1016</y>
+      <w>216</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+notifyAddedInstruction(cp, v)</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;20.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>712</x>
+      <y>1064</y>
+      <w>832</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>for each
+rec in receivers
+--
+fontsize=11
+fg=magenta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>816</x>
+      <y>1072</y>
+      <w>720</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+updateAddedInstruction(cp, v)</panel_attributes>
+    <additional_attributes>10.0;20.0;880.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>816</x>
+      <y>1056</y>
+      <w>8</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1464</x>
+      <y>304</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>receivers
+:CPEventReceiver
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1520</x>
+      <y>344</y>
+      <w>24</w>
+      <h>840</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1030.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1520</x>
+      <y>1080</y>
+      <w>16</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1136</x>
+      <y>768</y>
+      <w>184</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+this.position = position</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1136</x>
+      <y>800</y>
+      <w>136</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+alternative = aI</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1136</x>
+      <y>832</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+original = oI</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>1128</y>
+      <w>312</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;.
+v</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+</diagram>

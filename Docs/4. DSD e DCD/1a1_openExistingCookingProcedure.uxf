@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>209</x>
+      <y>0</y>
+      <w>66</w>
+      <h>121</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>44</y>
+      <w>33</w>
+      <h>737</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;650.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>638</x>
+      <y>55</y>
+      <w>33</w>
+      <h>726</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;640.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>88</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+openExistingCookingProcedure(cp)</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>638</x>
+      <y>77</y>
+      <w>22</w>
+      <h>660</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1078</x>
+      <y>121</y>
+      <w>22</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1078</x>
+      <y>55</y>
+      <w>33</w>
+      <h>726</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;640.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>649</x>
+      <y>99</y>
+      <w>451</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+getCurrentUser()</panel_attributes>
+    <additional_attributes>10.0;20.0;390.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>649</x>
+      <y>143</y>
+      <w>451</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+user</panel_attributes>
+    <additional_attributes>10.0;20.0;390.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>77</x>
+      <y>187</y>
+      <w>1144</w>
+      <h>572</h>
+    </coordinates>
+    <panel_attributes>alt
+[!user.isChef() &amp;&amp; !user.isCook()]
+fontsize=11
+--
+
+
+-.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>220</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw UseCaseLogicException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>902</x>
+      <y>55</y>
+      <w>33</w>
+      <h>726</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;640.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>88</x>
+      <y>275</y>
+      <w>1111</w>
+      <h>352</h>
+    </coordinates>
+    <panel_attributes>alt
+[cpManager.getCookingProcedures() == null ||
+cpManager.getCookingProcedures().isEmpty()]
+--
+
+
+
+-.
+
+
+
+
+-.
+
+
+
+
+-.
+
+
+
+
+-.
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>319</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw CookingProcedureManagerException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>88</x>
+      <y>374</y>
+      <w>154</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>[!cpManager.getCookingProcedures().contains(cp)]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>385</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw CookingProcedureManagerException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>88</x>
+      <y>440</y>
+      <w>154</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>[cp.owner != user]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>451</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw CookingProcedureManagerException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>88</x>
+      <y>495</y>
+      <w>143</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>[!cp.isUsed()]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>506</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw CookingProcedureManagerException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>88</x>
+      <y>561</y>
+      <w>143</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>[!cp.published == true]
+style=wordwrap
+fontsize=11</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>583</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+throw CookingProcedureManagerException</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>649</x>
+      <y>638</y>
+      <w>297</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;
+setCurrentCookingProcedure(cp)</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>231</x>
+      <y>704</y>
+      <w>429</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+cp</panel_attributes>
+    <additional_attributes>10.0;20.0;370.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>572</x>
+      <y>0</y>
+      <w>187</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>CatERingAppManager.
+cpManager
+:CookingProcedureManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>803</x>
+      <y>0</y>
+      <w>220</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>CatERingAppManager.
+cpManager.cookingProcedures
+:List&lt;CookingProcedure&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1045</x>
+      <y>0</y>
+      <w>187</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>CatERingAppManager.
+userManager
+:UserManager
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

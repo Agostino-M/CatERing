@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>342</x>
+      <y>108</y>
+      <w>54</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Chef</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>801</x>
+      <y>162</y>
+      <w>27</w>
+      <h>1179</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>207</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+1.predisponiMansioneCucina(isPreparation, titolo?)</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>243</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+mansione di cucina</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>306</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+2. aggiungiIstruzione(posizione, inAnticipo?, sulPosto?)</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>945</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+5.modificaIstruzione(istruzione, descrizione?, inAnticipo?,
+sulPosto?, posizione?)</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>981</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ok</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>342</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+nuova istruzione</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>189</y>
+      <w>27</w>
+      <h>1152</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>774</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+nuovo ingrediente</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLDeployment</id>
+    <coordinates>
+      <x>756</x>
+      <y>126</y>
+      <w>99</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>System</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>0</y>
+      <w>396</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>valign=center
+halign=center
+Diagrammi di sequenza di sistema
+per l'UC Gestire le ricette
+lw=0
+fontsize=24
+bg=#F9FF47</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>54</y>
+      <w>396</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>valign=center
+halign=center
+Estensione 2
+lw=0
+fontsize=18</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>738</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+3.aggiungiIngrediente(preparazione?, ingrediente?, dosi)
+</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>837</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+4.consultaRicettario()
+</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>873</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ricettario</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>315</x>
+      <y>288</y>
+      <w>549</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>LOOP
+fg=blue
+bg=#a3cdf8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>729</y>
+      <w>531</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LOOP
+fg=blue
+bg=#a3cdf8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>936</y>
+      <w>531</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LOOP
+fg=blue
+bg=#a3cdf8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>1044</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+6. dettagliaMansioneCucina(titolo?, listaTag?, quantità?, tConcreto?, 
+tPreparazione?, tTot?, autore?, postiDiversi?)</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>1080</y>
+      <w>459</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ok</panel_attributes>
+    <additional_attributes>10.0;20.0;490.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>1035</y>
+      <w>531</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>LOOP
+fg=blue
+bg=#a3cdf8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>1143</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+7.descriviMansioneCucina(descrizione, note)</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>1179</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ok</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>1242</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+8.pubblicaMansioneCucina()</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>1269</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ok</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>1134</y>
+      <w>531</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>OPT
+fg=#128C86
+bg=#B8E0E0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>1233</y>
+      <w>531</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>OPT
+fg=#128C86
+bg=#B8E0E0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>306</y>
+      <w>531</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>ALT
+fg=#761C8C
+bg=#e7bfff
+lw=2
+layer=1
+--
+
+
+
+-.
+
+
+
+
+
+
+-.
+
+
+
+
+
+-.
+
+
+
+
+
+-.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>423</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+preparazione estrapolata
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>387</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+2.a.1 estrapolaPreparazione(listaIstruzioni, listaIngredienti, dosePreparazione)
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>324</x>
+      <y>828</y>
+      <w>531</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>OPT
+fg=#128C86
+bg=#B8E0E0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>279</x>
+      <y>279</y>
+      <w>639</w>
+      <h>648</h>
+    </coordinates>
+    <panel_attributes>LOOP
+fg=blue
+bg=#a3cdf8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>207</x>
+      <y>270</y>
+      <w>756</w>
+      <h>1053</h>
+    </coordinates>
+    <panel_attributes>LOOP
+fg=blue
+bg=#a3cdf8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>477</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+2.b.1 aggiungiVariante(istruzioneOriginale, alternativa, posizione, inAnticipo?, 
+sulPosto?, descrizione)
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>504</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+nuova variante
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>558</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+2.c.1 aggiungiRipetizione(regolaRipetizione, posizione, inAnticipo?, 
+sulPosto?, descrizione)
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>585</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+nuova ripetizione
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>630</y>
+      <w>468</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+2.d.1 aggiungiRaggruppamento(listaIstruzioni, posizione, inAnticipo?, 
+sulPosto?, descrizione)
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>666</y>
+      <w>468</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+nuovo raggruppamento
+fg=#9E1C8C
+layer=2</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+</diagram>
